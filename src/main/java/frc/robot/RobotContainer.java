@@ -28,7 +28,7 @@ public class RobotContainer {
   private final CommandSwerveDrivetrain drivetrain = CommandSwerveDrivetrain.getInstance(); // My drivetrain
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDeadband(MaxSpeed * CommandSwerveDrivetrain.kDriveDeadBand).withRotationalDeadband(MaxAngularRate * CommandSwerveDrivetrain.kTurnDeadBand) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
   private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
@@ -100,6 +100,12 @@ public class RobotContainer {
   public void loop(){
     MaxSpeed = drivetrain.getMaxDriveSpeed();
     MaxAngularRate = drivetrain.getMaxTurnSpeed() * Math.PI;
+    
+    drive.Deadband = drivetrain.getDriveDeadBand();
+    drive.RotationalDeadband = drivetrain.getTurnDeadBand();
+
+    driveFacingAngle.Deadband = drivetrain.getDriveDeadBand();
+    driveFacingAngle.RotationalDeadband = drivetrain.getTurnDeadBand();
   }
 
   public Command getAutonomousCommand() {
