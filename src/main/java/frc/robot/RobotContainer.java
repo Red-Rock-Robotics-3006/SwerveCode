@@ -80,6 +80,22 @@ public class RobotContainer {
       new InstantCommand(() -> drivetrain.toggleHeadingPID(), drivetrain)
     );
 
+    drivestick.povLeft().onTrue(
+      new InstantCommand(() -> drivetrain.setTargetHeadingDegrees(90), drivetrain)
+    );
+
+    drivestick.povUp().onTrue(
+      new InstantCommand(() -> drivetrain.setTargetHeadingDegrees(0), drivetrain)
+    );
+
+    drivestick.povRight().onTrue(
+      new InstantCommand(() -> drivetrain.setTargetHeadingDegrees(-90), drivetrain)
+    );
+
+    drivestick.povDown().onTrue(
+      new InstantCommand(() -> drivetrain.setTargetHeadingDegrees(180), drivetrain)
+    );
+
     drivestick.a().whileTrue(drivetrain.applyRequest(() -> brake));
     drivestick.b().whileTrue(drivetrain
         .applyRequest(() -> point.withModuleDirection(new Rotation2d(-drivestick.getLeftY(), -drivestick.getLeftX()))));
@@ -100,7 +116,7 @@ public class RobotContainer {
   public void loop(){
     MaxSpeed = drivetrain.getMaxDriveSpeed();
     MaxAngularRate = drivetrain.getMaxTurnSpeed() * Math.PI;
-    
+
     drive.Deadband = drivetrain.getDriveDeadBand();
     drive.RotationalDeadband = drivetrain.getTurnDeadBand();
 
