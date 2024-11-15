@@ -30,8 +30,6 @@ public class SmartDashboardNumber {
     }
 
     public boolean hasChanged(){
-        boolean b = Double.compare(SmartDashboard.getNumber(key, defaultValue), lastValue) != 0;
-        getNumber();
-        return b;
+        return Double.compare(this.lastValue, this.getNumber()) != 0;
     }
 }
