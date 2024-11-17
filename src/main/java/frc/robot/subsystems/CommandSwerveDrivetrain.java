@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Utils3006.SmartDashboardNumber;
 import frc.robot.generated.TunerConstants;
+import redrocklib.logging.SmartDashboardNumber;
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements
@@ -79,15 +79,15 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
 
     private void initialize(){
-        this.rotationOmegaSignificance = new SmartDashboardNumber("dt-rotation rate limit", kRotationOmegaSignificance);
-        this.driveMaxSpeed = new SmartDashboardNumber("dt-max drive", kDriveMaxSpeed);
-        this.turnMaxSpeed = new SmartDashboardNumber("dt-max turn", kTurnMaxSpeed);
-        this.driveDeadBand = new SmartDashboardNumber("dt-drive deadband", kDriveDeadBand);
-        this.turnDeadBand = new SmartDashboardNumber("dt-turn deadband", kTurnDeadBand);
+        this.rotationOmegaSignificance = new SmartDashboardNumber("dt/rotation rate limit", kRotationOmegaSignificance);
+        this.driveMaxSpeed = new SmartDashboardNumber("dt/max drive", kDriveMaxSpeed);
+        this.turnMaxSpeed = new SmartDashboardNumber("dt/max turn", kTurnMaxSpeed);
+        this.driveDeadBand = new SmartDashboardNumber("dt/drive deadband", kDriveDeadBand);
+        this.turnDeadBand = new SmartDashboardNumber("dt/turn deadband", kTurnDeadBand);
 
-        this.rotateP = new SmartDashboardNumber("dt-heading p", kRotateP);
-        this.rotateI = new SmartDashboardNumber("dt-heading i", kRotateI);
-        this.rotateD = new SmartDashboardNumber("dt-heading d", kRotateD);
+        this.rotateP = new SmartDashboardNumber("dt/heading p", kRotateP);
+        this.rotateI = new SmartDashboardNumber("dt/heading i", kRotateI);
+        this.rotateD = new SmartDashboardNumber("dt/heading d", kRotateD);
     }
 
     public void setSwerveRequest(SwerveRequest.FieldCentricFacingAngle request){
@@ -142,9 +142,9 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
         this.angleRequest.HeadingController.setPID(this.rotateP.getNumber(), this.rotateI.getNumber(), this.rotateD.getNumber());
         
-        SmartDashboard.putBoolean("dt-using heading pid", this.enableHeadingPID);
-        SmartDashboard.putNumber("dt-current heading", this.getHeadingDegrees());
-        SmartDashboard.putNumber("dt-target heading", this.getTargetHeadingDegrees());
+        SmartDashboard.putBoolean("dt/using heading pid", this.enableHeadingPID);
+        SmartDashboard.putNumber("dt/current heading", this.getHeadingDegrees());
+        SmartDashboard.putNumber("dt/target heading", this.getTargetHeadingDegrees());
     }
 
     public Command resetHeadingCommand(){
